@@ -1,7 +1,5 @@
 # POEs
 
-PyTorch  [arXiv][CVF]
-
 
 PyTorch implementation of Learning Probabilistic Ordinal Embeddings for Uncertainty-Aware Regressiong  (CVPR 2021) \[[arXiv](https://arxiv.org/abs/2103.13629)\]
 
