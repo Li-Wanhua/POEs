@@ -4,7 +4,7 @@ body, td, th {
 h2 {
   margin-top: 3ex;
 }
-.color-primary-0 { color: #A83738 }  /* Main Primary color */
+.color-primary-0 { color: #743481 }  /* Main Primary color */
 .color-primary-1 { color: #D95242 }
 .color-primary-2 { color: #F26D40 }
 .color-primary-3 { color: #F5B74D }
@@ -15,7 +15,7 @@ h2 {
   margin-bottom: 1.5rem;
   color: #e4f1fe;
   text-align: center;
-  background-color: #A83738;
+  background-color: #743481;
 }
 
 .nd-pageheader a {
