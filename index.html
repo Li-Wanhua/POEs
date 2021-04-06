@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+<title>Learning Probabilistic Ordinal Embeddings for Uncertainty-Aware Regression</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+<style>
+  .container_2{
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+  .collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+
+  .active, .collapsible:hover {
+    background-color: #555;
+  }
+  
+  .content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+  }
+</style>
+
+<style>
+.paperthumb {
+  float:left; width: 120px; margin: 3px 10px 7px 0;
+}
+.paperdesc {
+  clear: both;
+}
+</style>
+</head>
+
+<body class="nd-docs">
+<div class="nd-pageheader">
+ <div class="container">
+ <p class="lead" style="font-size:30px">
+    <b><a href="https://arxiv.org/abs/2103.13629">Learning Probabilistic Ordinal Embeddings for Uncertainty-Aware Regression</a></b>
+  <address style="font-size: 110%;">
+    <nobr><a href="https://li-wanhua.github.io/">Wanhua Li</a><sup>1</sup>,</nobr>
+    <nobr>Xiaoke Huang<sup>2</sup>,</nobr>
+    <nobr><a href="http://ivg.au.tsinghua.edu.cn/Jiwen_Lu/">Jiwen Lu</a><sup>1</sup>,</nobr>
+    <nobr>Jianjiang Feng<sup>1</sup>,</nobr>
+    <nobr>Jie Zhou<sup>2</sup>,</nobr>
+  <br>
+      <nobr><sup>1</sup>Tsinghua University,</nobr>
+      <nobr><sup>2</sup>Beijing Normal University</nobr>
+  </address>
+   <div>IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2021</div>
+ </div>
+ </p>
+ </div>
+</div> <!-- end nd-pageheader -->
+
+<div class="container">
+
+<div class="row">
+<div class="col text-center">
+<p>
+ <a href="https://arxiv.org/abs/2103.03243" class="d-inline-block p-3 align-top"><img height="100" width="78" src="images/paper_thumb.png" style="border:1px solid" data-nothumb><br>CVPR Paper</a>
+ <a href="https://arxiv.org/abs/2103.03243" class="d-inline-block p-3 align-top"><img height="100" width="78"  src="images/paper_supp.png" style="border:1px solid" data-nothumb><br>Supplementary</a>
+  <a href="https://github.com/Li-Wanhua/POEs" class="d-inline-block p-3 align-top"><img height="100" width="78" src="images/github.png" style="border:1px solid" data-nothumb><br>Github Code</a>
+ <a href="https://github.com/Li-Wanhua/POEs" class="d-inline-block p-3 align-top"><img height="100" width="78" src="images/Video.png" style="border:1px solid" data-nothumb><br>Video</a>
+ </div>
+</div>
+
+
+
+
+
+<h2>Abstract</h2><hr>
+<p>Uncertainty is the only certainty there is. Modeling data uncertainty is essential for regression, especially in unconstrained settings. Traditionally the direct regression formulation is considered and the uncertainty is modeled by modifying the output space to a certain family of probabilistic distributions. On the other hand, classification based regression and ranking based solutions are more popular in practice while the direct regression methods suffer from the limited performance. How to model the uncertainty within the present-day technologies for regression remains an open issue. In this paper, we propose to learn probabilistic ordinal embeddings which represent each data as a multivariate Gaussian distribution rather than a deterministic point in the latent space. An ordinal distribution constraint is proposed to exploit the ordinal nature of regression. Our probabilistic ordinal embeddings can be integrated into popular regression approaches and empower them with the ability of uncertainty estimation. Experimental results show that our approach achieves competitive performance.</p>
+
+
+<h2>Motivation</h2><hr>
+
+<p align="center">
+    <img src="images/motivation.png" width="60%">
+</p>
+<p>We consider the problem of age estimation and display age labels next to the images. Deterministic unordered embeddings represent each facial image as a point in the latent space without considering the data uncertainty and the ordinal property. By contrast, probabilistic ordinal embeddings learn a distribution following the ordinal constraint in the embedding space. We see that the highly blurred image exhibits high uncertainty and the ordinal relations are preserved with our probabilistic ordinal embeddings.</p>
+
+
+<h2>Overview</h2><hr>
+<p align="center">
+    <img src="images/overview.png" width="90%">
+</p>
+<p>(A) The overall framework of our approach. Given an input image <i><b>x</b></i>, we first obtain the parameters <i><b>µ(x)</b></i> and  <i><b>Σ(x)</b></i>, which
+correspond to the mean and diagonal covariance of a multivariate Gaussian distribution respectively. Then we sample embeddings from
+this distribution with the reparameterization trick. Lastly, the sampled embeddings are sent to a popular regressor for prediction.</p>
+<p>(B) The
+idea of ordinal distribution constraint. For three samples with labels of 20, 30, and 50, we enforce the ordinal relations in the embedding
+space with the symmetrized Kullback-Leibler divergence or 2-Wasserstein distance. In the end, we expect that ordered probabilistic
+embeddings are obtained by applying the ordinal distribution constraint in the latent space.</p>
+
+
+<h2>Results</h2><hr>
+
+<p>Correlations between the uncertainty score and different performance metrics on two corrupted test sets. To quantity the correlation, we adopt the Kendall’s tau correlations. For the curves of three sub-figures, the results are 0.956, -0.733, and 0.778, respectively</p>
+<p align='center'><img src="images/corr.png" width="90%"></p>
+
+
+
+
+
+<p style="clear:both;">
+<div class="card">
+<h3 class="card-header">Citation</h3>
+<div class="card-block">
+<div class="card-text clickselect">
+  Wanhua Li, Xiaoke Huang, Jiwen Lu, Jianjiang Feng, and Jie Zhou. <em>Learning Probabilistic Ordinal Embeddings for Uncertainty-Aware Regression.</em> IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2021.
+</div>
+</div>
+</div>
+</p>
+
+<p>
+<div class="card">
+<h3 class="card-header">Bibtex</h3>
+<div class="card-block">
+<pre class="card-text clickselect">
+@inproceedings{li2021probabilistic,
+  title     = {Learning Probabilistic Ordinal Embeddings for Uncertainty-Aware Regression},
+  author    = {Li, Wanhua and Huang, Xiaoke and Lu, Jiwen and Feng, Jianjiang and Zhou, Jie},
+  booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2021},
+}
+</pre>
+</div>
+</div>
+</p>
+
+
+<p align="right">
+     <a href="https://hanlab.mit.edu/projects/anycost-gan/">Website Template</a>
+</p>
+
+</div>
+</div> <!-- row -->
+
+</div> <!-- container -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+  
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.maxHeight){
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight * 50+ "px";
+      } 
+      content.style.height = "550%";
+    });
+  }
+</script>
+
+</body>
+</html>
+
+
