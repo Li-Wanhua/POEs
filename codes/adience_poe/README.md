@@ -1,6 +1,6 @@
 # POEs
 
-PyTorch re-implementation of Learning Probabilistic Ordinal Embeddings for Uncertainty-Aware Regressiong  (CVPR 2021)[[project page](https://github.com/Li-Wanhua/POEs)]
+PyTorch re-implementation of Learning Probabilistic Ordinal Embeddings for Uncertainty-Aware Regressiong  (CVPR 2021)[[project page](https://li-wanhua.github.io/POEs/)]
 
 # Codes for Adience Dataset
 [Adience Dataset](https://talhassner.github.io/home/projects/Adience/Adience-data.html)
